@@ -1,18 +1,127 @@
-<html>
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.js"></script>"
-<title>Chart.js</title>
+<!DOCTYPE html>
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<title>Chart.js</title>
 </head>
 <body>
   <div class="container">
-    <canvas id="myChart"></canvas>
+    <h1 class="display-2 text-center">Largest Cities Global by Charts</h1>
+    <div class="row" id="firstBox">
+      <div class="col-md-6 col-sm-6">
+        <canvas id="myChart"></canvas>
+      </div>
+      <div class="col-md-6 col-sm-6">
+        <canvas id="secondChart"></canvas>
+      </div>
+    </div>
+
+    <div class="row" id="secondBox">
+      <div class="col-md-6 col-sm-6">
+          <canvas id="thirdChart"></canvas>
+      </div>
+      <div class="col-md-6 col-sm-6">
+          <canvas id="fourthChart"></canvas>
+      </div>
+    </div>
+
+
   </div>
 
   <script>
-    let myChart = document.getElementById('myChart').getContext('2d');s
+    //Global options
+    Chart.defaults.global.defaultFontFamily = 'Lato';
+
+    //Function
+
+    const createConfig = (config, left = 0 , right = 0, bottom = 0, top = 0) => {
+
+        return {
+          type: config ,
+          data: {
+            labels: ['Tokyo', 'Delhi', 'Shanghai', 'Mexico City', 'São Paulo', 'Mumbai', 'Osaka', 'Beijing'],
+            datasets: [{
+              label: 'Population',
+              data: [
+                37833000,
+
+                24953000,
+
+                22991000,
+
+                20843000,
+
+                20831000,
+
+                20741000,
+
+                20123000,
+
+                19520000,
+              ],
+              backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)',
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+
+              ],
+              borderWidth: 1
+            }]
+          },
+          options: {
+            scales: {
+              display: true ,
+              yAxes: [{
+                  ticks: {
+                    beginAtZero: true
+                  }
+              }]
+            },
+          title:{
+              display: true,
+              fontSize: 25,
+            },
+            legend: {
+              display: false,
+                labels: {
+                  fontColor: 'black',
+                  fontSize: '16',
+                }
+              },
+            layout:{
+              padding: {
+                left: left,
+                right: right,
+                bottom: bottom,
+                top: top
+              }
+            }
+           }
+         };
+}
+
+         let myChart = document.getElementById('myChart').getContext('2d');
+         let massBarChart = new Chart(myChart, createConfig('bar'));
+         let secondChart = document.getElementById('secondChart').getContext('2d');
+         let massLineChart = new Chart(secondChart, createConfig('line'));
+         let thirdChart = document.getElementById('thirdChart').getContext('2d');
+         let massPieChart = new Chart(thirdChart, createConfig('polarArea', 0, 0, 200, 0));
+         let fourthChart = document.getElementById('fourthChart').getContext('2d');
+         let massRadarChart = new Chart(fourthChart, createConfig('horizontalBar'));
+
+
+
+
+  </script>
 
 </body>
 

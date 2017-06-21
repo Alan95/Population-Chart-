@@ -8,7 +8,7 @@
     const createConfig = (config, left = 0 , right = 0, bottom = 0, top = 0) => {
 
         return {
-          type: config ,
+          type: config,
           data: {
             labels: ['Tokyo', 'Delhi', 'Shanghai', 'Mexico City', 'São Paulo', 'Mumbai', 'Osaka', 'Beijing'],
             datasets: [{
